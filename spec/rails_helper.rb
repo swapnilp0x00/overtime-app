@@ -26,7 +26,7 @@ require 'capybara/rails'
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
-ActiveRecord::Migration.maintain_test_schema!
+# ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -37,11 +37,11 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = false
 
-  config.before(:suite) { DatabaseCleaner.clean_with(:truncation) }
-  config.before(:each) { DatabaseCleaner.strategy = :transaction }
-  config.before(:each, :js => true) { DatabaseCleaner.strategy = :truncation }
-  config.before(:each) { DatabaseCleaner.start }
-  config.after(:each) { DatabaseCleaner.clean }
+  # config.before(:suite) { DatabaseCleaner.clean_with(:truncation) }
+  # config.before(:each) { DatabaseCleaner.strategy = :transaction }
+  # config.before(:each, :js => true) { DatabaseCleaner.strategy = :truncation }
+  # config.before(:each) { DatabaseCleaner.start }
+  # config.after(:each) { DatabaseCleaner.clean }
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
