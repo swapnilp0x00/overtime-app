@@ -1,14 +1,17 @@
 class PostsController < ApplicationController
   before_action :set_post , only:[:show]
+
   def index
   end
 
   def create
     @post = Post.create(post_params);
+    # attaches id of signed in user
+    @post.user_id = current_user.id
     if @post.save
       redirect_to @post , notice: 'Post created successfully'
     else
-      render 'new'
+      render :new
     end
   end
 
