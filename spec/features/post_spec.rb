@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'navigate' do
   before do
-    @user = User.create(email:"test@test.com",password:"astfgh",password_confirmation:"astfgh",first_name:"first_name",last_name:"last_name")
+    @user = FactoryGirl.create(:user)
     login_as(@user,:scope => :user)
   end
   describe 'index' do
@@ -16,8 +16,12 @@ describe 'navigate' do
       expect(page).to have_content(/Posts/)
     end
     it "has list of posts" do
-      post1 = Post.create(date: Date.today, rationale:"Post1",user_id:@user.id)
-      post2 = Post.create(date: Date.today, rationale:"Post2",user_id:@user.id)
+      # build_stubbed doesn't hit database
+      # it mimmics it does
+      post1 = FactoryGirl.create(:post, user:@user)
+      # post1 = FactoryGirl.build_stubbed(:post)
+      post2 = FactoryGirl.create(:second_post, user:@user)
+      # post2 = FactoryGirl.build_stubbed(:second_post)
       visit posts_path
       expect(page).to have_content(/Post1|Post2/)
     end
@@ -25,7 +29,7 @@ describe 'navigate' do
 
   describe "creation" do
     before do
-      user = User.create(email:"test2@test.com",password:"astfgh",password_confirmation:"astfgh",first_name:"first_name",last_name:"last_name")
+      user = FactoryGirl.create(:user)
       # used to sign in devise user
       login_as(user,:scope => :user)
       visit new_post_path
