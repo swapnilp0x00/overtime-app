@@ -26,7 +26,13 @@ describe 'navigate' do
       expect(page).to have_content(/Post1|Post2/)
     end
   end
-
+  describe 'New' do
+    it 'has a link from homepage' do
+      visit root_path
+      click_link("new_post_from_nav")
+      expect(page.status_code).to eq(200)
+    end
+  end
   describe "creation" do
     before do
       user = FactoryGirl.create(:user)
@@ -50,7 +56,6 @@ describe 'navigate' do
       expect(User.last.posts.last.rationale).to eq('User Rationale')
     end
   end
-
   describe "Edit" do
     before do
       @post = FactoryGirl.create(:post, user:@user)

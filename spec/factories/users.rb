@@ -2,8 +2,8 @@ FactoryGirl.define do
   sequence :email do |n|
     "test#{n}@gmail.com"
   end
-  # Or simply use Faker with random data
-  
+  # Or simply use Faker with random data instead of sequence
+
   factory :user do
     first_name "John"
     last_name "Snow"
